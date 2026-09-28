@@ -37,4 +37,11 @@ describe('RandomGenerator', () => {
     const rng = new RandomGenerator(42);
     expect(() => rng.reset(123.45)).toThrow("Seed must be an integer");
   })
+
+  it('should generate numbers in the range [0, 1)', () => {
+    const rng = new RandomGenerator();
+    const value = rng.nextFloat();
+    expect(value).toBeGreaterThanOrEqual(0);
+    expect(value).toBeLessThan(1);
+  })
 })
