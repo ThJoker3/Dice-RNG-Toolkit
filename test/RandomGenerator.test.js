@@ -29,4 +29,12 @@ describe('RandomGenerator', () => {
     const resultsAfterReset = [rng.nextFloat(), rng.nextFloat(), rng.nextFloat()];
     expect(resultsBeforeReset).toEqual(resultsAfterReset);
   })
+
+  it('should throw an error if the seed is not an integer', () => {
+    const seed = 123.45;
+    expect(() => new RandomGenerator(seed)).toThrow("Seed must be an integer");
+
+    const rng = new RandomGenerator(42);
+    expect(() => rng.reset(123.45)).toThrow("Seed must be an integer");
+  })
 })
