@@ -44,4 +44,15 @@ describe('RandomGenerator', () => {
     expect(value).toBeGreaterThanOrEqual(0);
     expect(value).toBeLessThan(1);
   })
+
+  it('should generate integers in the specified range', () => {
+    const rng = new RandomGenerator();
+    const min = 1;
+    const max = 6;
+    for (let i = 0; i < 100; i++) {
+      const value = rng.nextInt(min, max);
+      expect(value).toBeGreaterThanOrEqual(min);
+      expect(value).toBeLessThanOrEqual(max);
+    }
+  })
 })

@@ -5,7 +5,7 @@ export class RandomGenerator {
     this.reset(seed);
   }
 
-   #assertInteger(value, name) {
+  #assertInteger(value, name) {
     if (!Number.isInteger(value)) {
       throw new Error(`${name || 'Value'} must be an integer`);
     }
