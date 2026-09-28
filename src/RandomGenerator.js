@@ -1,4 +1,4 @@
-class RandomGenerator {
+export class RandomGenerator {
   #state;
 
   constructor(seed = Date.now()) {
