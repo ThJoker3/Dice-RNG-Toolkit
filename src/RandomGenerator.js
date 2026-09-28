@@ -1,8 +1,15 @@
 class RandomGenerator {
   #state;
 
-  constructor(seed) {
-    this.#state = seed;
+  constructor(seed = Date.now()) {
+    this.reset(seed);
+  }
+
+  reset(seed) {
+    if (!Number.isInteger(seed)) {
+      throw new Error("Seed must be an integer");
+    }
+    this.#state = seed | 0;
   }
 
   nextFloat() {
