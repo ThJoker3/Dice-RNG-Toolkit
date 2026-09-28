@@ -20,4 +20,13 @@ describe('RandomGenerator', () => {
     const results2 = [rng2.nextFloat(), rng2.nextFloat(), rng2.nextFloat()];
     expect(results1).not.toEqual(results2);
   })
+
+  it('should generate the same sequence after reset with the same seed', () => {
+    const seed = 12345;
+    const rng = new RandomGenerator(seed);
+    const resultsBeforeReset = [rng.nextFloat(), rng.nextFloat(), rng.nextFloat()];
+    rng.reset(seed);
+    const resultsAfterReset = [rng.nextFloat(), rng.nextFloat(), rng.nextFloat()];
+    expect(resultsBeforeReset).toEqual(resultsAfterReset);
+  })
 })
