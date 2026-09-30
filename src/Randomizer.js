@@ -1,6 +1,9 @@
 export class Randomizer {
   pick(array, randomGenerator) {
-    if (!Array.isArray(array) || array.length === 0) {
+    if (!Array.isArray(array)) {
+      throw new Error("Argument must be an array");
+    }
+    if (array.length === 0) {
       throw new Error("Array must not be empty");
     }
     const index = randomGenerator.nextInt(0, array.length - 1);
