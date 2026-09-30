@@ -39,4 +39,24 @@ describe('Randomizer', () => {
     randomizer.shuffle(original, rng);
     expect(original).toEqual(before);
   })
+
+  it('should return an item from the items array', () => {
+    const randomizer = new Randomizer();
+    const rng = new RandomGenerator(1);
+    const items = ['a', 'b', 'c'];
+    const result = randomizer.pickWeighted(items, [1, 3, 6], rng);
+    expect(items).toContain(result);
+  })
+
+  it('should throw an error if items or weights diffrent lengths', () => {
+    const randomizer = new Randomizer();
+    const rng = new RandomGenerator(1);
+    expect(() => randomizer.pickWeighted(['a', 'b'], [1], rng)).toThrow("Items and weights must have the same length");
+  })
+
+  it('should throw an error if items or weights is not an array', () => {
+    const randomizer = new Randomizer();
+    const rng = new RandomGenerator(1);
+    expect(() => randomizer.pickWeighted('not an array', [1], rng)).toThrow("Items must be an array");
+  })
 })
