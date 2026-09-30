@@ -2,8 +2,10 @@ import { Mulberry } from "./Mulberry.js";
 
 export class RandomGenerator {
   #algorithm;
+  #Algorithm;
 
-  constructor(seed = Date.now()) {
+  constructor(seed = Date.now(), Algorithm = Mulberry) {
+    this.#Algorithm = Algorithm
     this.reset(seed);
   }
 
@@ -15,7 +17,7 @@ export class RandomGenerator {
 
   reset(seed) {
     this.#assertInteger(seed, "Seed");
-    this.#algorithm = new Mulberry(seed);
+    this.#algorithm = new this.#Algorithm(seed);
   }
 
   nextFloat() {
