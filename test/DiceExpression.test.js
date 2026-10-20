@@ -36,4 +36,9 @@ describe('DiceExpression', () => {
       expect(roll).toBeLessThanOrEqual(6);
     }
   })
+
+  it('should throw an error if notation is not a string', () => {
+    expect(() => new DiceExpression(36)).toThrow("Notation must be a string");
+    expect(() => new DiceExpression()).toThrow("Notation must be a string");
+  })
 })

@@ -14,6 +14,9 @@ export class DiceExpression {
    * @throws {Error} If `notation` does not match the expected `"NdM"` format.
    */
   constructor(notation) {
+    if (typeof notation !== "string") {
+      throw new Error("Notation must be a string");
+  }
     const match = notation.match(/^(\d*)d(\d+)$/);
     if (!match) {
       throw new Error("Invalid dice notation.");
