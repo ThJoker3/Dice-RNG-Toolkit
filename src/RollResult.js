@@ -9,7 +9,7 @@ export class RollResult {
    * @param {number[]} rolls - The individual roll results.
    */
   constructor(rolls) {
-    this.#rolls = rolls;
+    this.#rolls = [...rolls];
   }
 
   /**

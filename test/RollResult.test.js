@@ -23,4 +23,12 @@ describe('RollResult', () => {
     const result = new RollResult([4, 2, 6]);
     expect(result.toString()).toBe('Rolls: [4, 2, 6], Total: 12');
   })
+
+  it('should not be affected when the original input array is changed', () => {
+    const input = [1, 2, 3];
+    const result = new RollResult(input);
+    input.push(99);
+    expect(result.getRolls()).toEqual([1, 2, 3]);
+    expect(result.getTotal()).toBe(6);
+  })
 })
