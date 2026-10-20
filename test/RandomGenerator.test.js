@@ -56,12 +56,12 @@ describe('RandomGenerator', () => {
     }
   })
 
-  it("Should throw an error if min is greater than max in nextInt", () => {
+  it('should throw an error if min is greater than max in nextInt', () => {
     const rng = new RandomGenerator();
     expect(() => rng.nextInt(10, 1)).toThrow("Min must not be greater than Max");
   })
 
-  it("Should throw an error if min or max is not an integer in nextInt", () => {
+  it('should throw an error if min or max is not an integer in nextInt', () => {
     const rng = new RandomGenerator();
     expect(() => rng.nextInt(1.5, 10)).toThrow("Min must be an integer");
     expect(() => rng.nextInt(1, 10.5)).toThrow("Max must be an integer");

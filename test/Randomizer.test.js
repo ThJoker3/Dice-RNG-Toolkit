@@ -40,7 +40,7 @@ describe('Randomizer', () => {
     expect(original).toEqual(before);
   })
 
-  it('should change the order', () => {
+  it('should change the order of the elements', () => {
     const randomizer = new Randomizer();
     const rng = new RandomGenerator(42);
     const original = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -56,7 +56,7 @@ describe('Randomizer', () => {
     expect(items).toContain(result);
   })
 
-  it('should throw an error if items or weights diffrent lengths', () => {
+  it('should throw an error if items and weights have different lengths', () => {
     const randomizer = new Randomizer();
     const rng = new RandomGenerator(1);
     expect(() => randomizer.pickWeighted(['a', 'b'], [1], rng)).toThrow("Items and weights must have the same length");
@@ -74,7 +74,7 @@ describe('Randomizer', () => {
     expect(() => randomizer.pickWeighted([], [], rng)).toThrow("Items must not be empty");
   })
 
-  it('should throw an error if weights is empty', () => {
+  it('should throw an error if a weight is negative or not a number', () => {
     const randomizer = new Randomizer();
     const rng = new RandomGenerator(1);
     expect(() => randomizer.pickWeighted(['a', 'b'], [-1, 2], rng)).toThrow("Weights must be non-negative numbers");

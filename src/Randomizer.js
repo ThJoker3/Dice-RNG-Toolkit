@@ -51,9 +51,9 @@ export class Randomizer {
    */
   pickWeighted(items, weights, randomGenerator) {
     this.#assertValidWeightedItems(items, weights);
-    const totalWeight = weights.reduce((sum, w) => sum + w, 0);
+    const totalWeight = weights.reduce((sum, weight) => sum + weight, 0);
     const threshold = randomGenerator.nextFloat() * totalWeight;
-    return this.#findItemsAtCumulativeWeight(items, weights, threshold);
+    return this.#findItemAtCumulativeWeight(items, weights, threshold);
   }
 
   #assertValidWeightedItems(items, weights) {
@@ -79,7 +79,7 @@ export class Randomizer {
     }
   }
 
-  #findItemsAtCumulativeWeight(items, weights, threshold) {
+  #findItemAtCumulativeWeight(items, weights, threshold) {
     let cumulativeWeight = 0;
     for (let i = 0; i < items.length; i++) {
       cumulativeWeight += weights[i];

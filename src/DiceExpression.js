@@ -41,11 +41,11 @@ export class DiceExpression {
    * @returns {RollResult} The individual rolls and their total.
    */
   roll(randomGenerator) {
-    const dice = new Dice(this.#sides);
-    const rollsArray = [];
+    const die = new Dice(this.#sides);
+    const rolls = [];
     for (let i = 0; i< this.#count; i++) {
-      rollsArray.push(dice.roll(randomGenerator));
+      rolls.push(die.roll(randomGenerator));
     }
-    return new RollResult(rollsArray);
+    return new RollResult(rolls);
   }
 }
