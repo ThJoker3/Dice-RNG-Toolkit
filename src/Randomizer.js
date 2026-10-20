@@ -52,6 +52,13 @@ export class Randomizer {
    * @throws {Error} If `items`/`weights` are not arrays, or their lengths differ.
    */
   pickWeighted(items, weights, randomGenerator) {
+    this.#assertValidWeightedItems(items, weights);
+    const totalWeight = weights.reduce((sum, w) => sum + w, 0);
+    const threshold = randomGenerator.nextFloat() * totalWeight;
+    return this.#findItemsAtCumulativeWeight(items, weights, threshold);
+  }
+
+  #assertValidWeightedItems(items, weights) {
     this.#assertArray(items, "Items");
     this.#assertArray(weights, "Weights");
     if (items.length !== weights.length) {
@@ -61,24 +68,25 @@ export class Randomizer {
       throw new Error("Items must not be empty");
     }
     this.#assertValidWeights(weights);
-    const totalWeight = weights.reduce((sum, w) => sum + w, 0);
-    if (totalWeight <= 0) {
-      throw new Error("At least one weight must be greater than zero");
-    }
-    const threshold = randomGenerator.nextFloat() * totalWeight;
-    let running = 0;
-    for (let i = 0; i < items.length; i++) {
-      running += weights[i];
-      if (running > threshold) {
-        return items[i];
-      }
-    }
   }
 
   #assertValidWeights(weights) {
     for (const weight of weights) {
       if (!Number.isFinite(weight) || weight < 0) {
         throw new Error("Weights must be non-negative numbers");
+      }
+    }
+    if (!weights.some((weight) => weight > 0)) {
+      throw new Error("At least one weight must be greater than zero");
+    }
+  }
+
+  #findItemsAtCumulativeWeight(items, weights, threshold) {
+    let cumulativeWeight = 0;
+    for (let i = 0; i < items.length; i++) {
+      cumulativeWeight += weights[i];
+      if (cumulativeWeight > threshold) {
+        return items[i];
       }
     }
   }
