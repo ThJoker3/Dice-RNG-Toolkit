@@ -67,8 +67,8 @@ export class RandomGenerator {
    * @throws {Error} If `probability` is outside the range [0, 1].
    */
   nextBoolean(probability = 0.5) {
-    if (probability < 0 || probability > 1) {
-      throw new Error("Probability must be between 0 and 1");
+    if (!Number.isFinite(probability) || probability < 0 || probability > 1) {
+      throw new Error("Probability must be a number between 0 and 1");
     }
     return this.nextFloat() < probability;
   }

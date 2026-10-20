@@ -66,4 +66,19 @@ describe('RandomGenerator', () => {
     expect(() => rng.nextInt(1.5, 10)).toThrow("Min must be an integer");
     expect(() => rng.nextInt(1, 10.5)).toThrow("Max must be an integer");
   })
+
+  it('should throw an error if probability is not a number between 0 and 1', () => {
+    const rng = new RandomGenerator(1);
+    expect(() => rng.nextBoolean(NaN)).toThrow("Probability must be a number between 0 and 1");
+    expect(() => rng.nextBoolean('x')).toThrow("Probability must be a number between 0 and 1");
+    expect(() => rng.nextBoolean(1.5)).toThrow("Probability must be a number between 0 and 1");
+  })
+
+  it('should always return false for probability 0 and true for probability 1', () => {
+    const rng = new RandomGenerator(1);
+    for (let i = 0; i < 100; i++) {
+      expect(rng.nextBoolean(0)).toBe(false);
+      expect(rng.nextBoolean(1)).toBe(true);
+    }
+  })
 })
