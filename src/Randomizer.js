@@ -35,7 +35,7 @@ export class Randomizer {
     const copy = [...array];
     for (let i = copy.length - 1; i > 0; i--) {
       const j = randomGenerator.nextInt(0, i);
-      [copy[i], copy[j] = copy[j], copy[i]];
+      [copy[i], copy[j]] = [copy[j], copy[i]];
     }
     return copy;
   }

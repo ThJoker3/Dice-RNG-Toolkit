@@ -40,6 +40,14 @@ describe('Randomizer', () => {
     expect(original).toEqual(before);
   })
 
+  it('should change the order', () => {
+    const randomizer = new Randomizer();
+    const rng = new RandomGenerator(42);
+    const original = [1, 2, 3, 4, 5, 6, 7, 8];
+    const shuffled = randomizer.shuffle(original, rng);
+    expect(shuffled).not.toEqual(original);
+  })
+
   it('should return an item from the items array', () => {
     const randomizer = new Randomizer();
     const rng = new RandomGenerator(1);
