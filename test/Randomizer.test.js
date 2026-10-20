@@ -59,4 +59,23 @@ describe('Randomizer', () => {
     const rng = new RandomGenerator(1);
     expect(() => randomizer.pickWeighted('not an array', [1], rng)).toThrow("Items must be an array");
   })
+
+  it('should throw an error if items is empty', () => {
+    const randomizer = new Randomizer();
+    const rng = new RandomGenerator(1);
+    expect(() => randomizer.pickWeighted([], [], rng)).toThrow("Items must not be empty");
+  })
+
+  it('should throw an error if weights is empty', () => {
+    const randomizer = new Randomizer();
+    const rng = new RandomGenerator(1);
+    expect(() => randomizer.pickWeighted(['a', 'b'], [-1, 2], rng)).toThrow("Weights must be non-negative numbers");
+    expect(() => randomizer.pickWeighted(['a', 'b'], ['x', 2], rng)).toThrow("Weights must be non-negative numbers");
+  })
+
+  it('should throw an error if all weights are zero', () => {
+    const randomizer = new Randomizer();
+    const rng = new RandomGenerator(1);
+    expect(() => randomizer.pickWeighted(['a', 'b'], [0, 0], rng)).toThrow("At least one weight must be greater than zero");
+  })
 })
