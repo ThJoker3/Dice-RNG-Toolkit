@@ -6,20 +6,20 @@ import { Mulberry } from "./Mulberry.js";
  * deterministic, reproducible tests and gameplay.
  *
  * The actual number-generation algorithm is not built into this class — it is delegated
- * to an injectable algorithm class (see the `Algorithm` constructor parameter), so the
+ * to an injectable algorithm class (see the `AlgorithmClass` constructor parameter), so the
  * underlying algorithm can be swapped without changing this class. Defaults to `Mulberry`.
  */
 export class RandomGenerator {
   #algorithm;
-  #Algorithm;
+  #AlgorithmClass;
 
   /**
    * @param {number} [seed=Date.now()] - The seed to initialize the generator with.
-   * @param {new (seed: number) => { nextUint32(): number }} [Algorithm=Mulberry] - The algorithm class to use internally.
+   * @param {new (seed: number) => { nextUint32(): number }} [AlgorithmClass=Mulberry] - The algorithm class to use internally.
    * @throws {Error} If `seed` is not an integer.
    */
-  constructor(seed = Date.now(), Algorithm = Mulberry) {
-    this.#Algorithm = Algorithm
+  constructor(seed = Date.now(), AlgorithmClass = Mulberry) {
+    this.#AlgorithmClass = AlgorithmClass
     this.reset(seed);
   }
 
@@ -36,7 +36,7 @@ export class RandomGenerator {
    */
   reset(seed) {
     this.#assertInteger(seed, "Seed");
-    this.#algorithm = new this.#Algorithm(seed);
+    this.#algorithm = new this.#AlgorithmClass(seed);
   }
 
   /**

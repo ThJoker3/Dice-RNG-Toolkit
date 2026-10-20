@@ -81,4 +81,14 @@ describe('RandomGenerator', () => {
       expect(rng.nextBoolean(1)).toBe(true);
     }
   })
+
+  it('should use an injected algorithm class instead of the default', () => {
+    class FixedAlgorithm {
+      nextUint32() {
+        return 2 ** 31;
+      }
+    }
+    const rng = new RandomGenerator(1, FixedAlgorithm);
+    expect(rng.nextFloat()).toBe(0.5);
+  })
 })
